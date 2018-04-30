@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DOCKER_CONTAINER_NAME=test-nginx
+
+docker stop $DOCKER_CONTAINER_NAME

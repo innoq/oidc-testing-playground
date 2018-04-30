@@ -1,0 +1,5 @@
+#!/bin/sh
+
+DOCKER_CONTAINER_NAME=keycloak
+
+docker rm $DOCKER_CONTAINER_NAME

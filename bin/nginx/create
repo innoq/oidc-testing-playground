@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DOCKER_CONTAINER_NAME=test-nginx
+
+echo "${NGINX_CONF}"
+if [ -z "${NGINX_CONF}" ]; then
+  echo "Set NGINX_CONF to your nginx config file (absolute path!)"
+  exit 1
+fi
+
+docker run -d -p80:80 --name $DOCKER_CONTAINER_NAME -v $NGINX_CONF:/etc/nginx/nginx.conf:ro nginx

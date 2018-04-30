@@ -1,0 +1,14 @@
+#!/bin/bash
+
+DOCKER_CONTAINER_NAME=keycloak
+export USER=${1:-user}
+export PASSWORD=${2:-password}
+
+echo "adding user $USER"
+
+docker exec $DOCKER_CONTAINER_NAME \
+  keycloak/bin/add-user-keycloak.sh -u $USER -p $PASSWORD
+
+echo "restarting keycloak"
+
+docker restart $DOCKER_CONTAINER_NAME
