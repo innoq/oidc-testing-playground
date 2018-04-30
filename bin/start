@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./bin/keycloak/start
+./bin/nginx/start

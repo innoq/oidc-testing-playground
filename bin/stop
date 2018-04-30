@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./bin/keycloak/stop
+./bin/nginx/stop

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+CLIENT_ID="${CLIENT_ID:-myclient}"
+NGINX_CONF="${NGINX_CONF:-$(pwd)/bin/nginx.conf}"
+REDIRECT_URL="${REDIRECT_URL:-http://localhost/*}"
+
+echo "==*==*==*==*==*==*==*==*==*"
+echo "Creating keycloak image"
+
+./bin/keycloak/create
+
+sleep 3
+
+echo "Creating client with client id $CLIENT_ID and redirect url $REDIRECT_URL"
+
+./bin/keycloak/create_client "$CLIENT_ID" "$REDIRECT_URL"
+
+echo "==*==*==*==*==*==*==*==*==*"
+ 
+echo "Setting up NGINX"
+
+NGINX_CONF="$NGINX_CONF" ./bin/nginx/create
+
+echo "Setup finished"

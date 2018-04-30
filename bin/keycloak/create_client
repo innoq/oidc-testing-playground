@@ -1,19 +1,24 @@
 #!/bin/bash
 
 DOCKER_CONTAINER_NAME=keycloak
-export CLIENT_ID=${1:-myclient}
-export REDIRECT_URI=${2:-http://example.com}
+USERNAME="${USERNAME:-user}"
+PASSWORD="${PASSWORD:-password}"
+
+export CLIENT_ID="${1:-myclient}"
+export REDIRECT_URI="${2:-http://example.com}"
 
 SCRIPT=$(cat <<EOF
 #!/bin/sh
-keycloak/bin/kcreg.sh config credentials --server http://localhost:8080/auth --realm master --user user --password password
+keycloak/bin/kcreg.sh config credentials --server http://localhost:8080/auth --realm master --user $USERNAME --password $PASSWORD
 keycloak/bin/kcreg.sh create -s clientId="$CLIENT_ID" -s 'redirectUris=["$REDIRECT_URI"]'
 keycloak/bin/kcreg.sh get "$CLIENT_ID" | jq '.secret'
 EOF)
+
+echo "$SCRIPT"
 
 echo "$SCRIPT" > /tmp/foo
 chmod +x /tmp/foo
 docker cp /tmp/foo $DOCKER_CONTAINER_NAME:/opt/jboss/foo
 
-
+echo "Client secret: "
 docker exec $DOCKER_CONTAINER_NAME /opt/jboss/foo 
