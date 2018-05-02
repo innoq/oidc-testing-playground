@@ -1,0 +1,14 @@
+#!/bin/sh
+
+USERNAME="${USERNAME:-user}"
+PASSWORD="${PASSWORD:-password}"
+CLIENT_ID="${CLIENT_ID:-myclient}"
+REDIRECT_URI="${REDIRECT_URI:-http://example.com}"
+
+keycloak/bin/kcreg.sh config credentials \
+  --server http://localhost:8080/auth \
+  --realm master \
+  --user "$USERNAME" \
+  --password "$PASSWORD"
+keycloak/bin/kcreg.sh create -s clientId="$CLIENT_ID" -s 'redirectUris=["$REDIRECT_URI"]'
+keycloak/bin/kcreg.sh get "$CLIENT_ID" | jq '.secret'
