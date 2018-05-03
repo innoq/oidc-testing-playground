@@ -10,5 +10,5 @@ keycloak/bin/kcreg.sh config credentials \
   --realm master \
   --user "$USERNAME" \
   --password "$PASSWORD"
-keycloak/bin/kcreg.sh create -s clientId="$CLIENT_ID" -s 'redirectUris=["$REDIRECT_URI"]'
+keycloak/bin/kcreg.sh create -s clientId="$CLIENT_ID" -s "redirectUris=[\"$REDIRECT_URI\"]"
 keycloak/bin/kcreg.sh get "$CLIENT_ID" | jq '.secret'
