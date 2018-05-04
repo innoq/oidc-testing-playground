@@ -16,8 +16,8 @@ This setup uses [Docker](https://www.docker.com/) and bash.
 There are a few steps of setup for both the OIDC server and the loadbalancer.
 
 1. Start you application locally on a few ports
-3. Modify the `bin/nginx.conf`. The `server host.docker.internal:5677` lines should be modified so that you have one line for each instance of your service that is running and the port after `host.docker.internal` is the port that the instance is running on
-4. Run `./bin/create`. This will create a keycloak docker image, create an OIDC client within that image (printing the client secret to the console), and set up and start an NGINX using the config in `bin/nginx.conf`
+3. Modify the `bin/nginx/nginx.conf`. The `server host.docker.internal:5677` lines should be modified so that you have one line for each instance of your service that is running and the port after `host.docker.internal` is the port that the instance is running on
+4. Run `./bin/create`. This will create a keycloak docker image, create an OIDC client within that image (printing the client secret to the console), and set up and start an NGINX using the config in `bin/nginx/nginx.conf`
 
 The options for the create script can be modified using environment variables:
 
